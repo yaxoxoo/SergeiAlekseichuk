@@ -1,0 +1,300 @@
+/* ==========================================================================
+   Sergei Alekseichuk — SMM Barcelona
+   Единицы: rem (база 16px). Брейкпоинты: em. Именование: BEM.
+   ========================================================================== */
+
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #9a9a9a;
+  --line: #e4e4e4;
+  --accent: #1a4dff;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Geist", system-ui, sans-serif;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* Lenis (плавный скролл) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- NAV ---------- */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.125rem var(--gutter);
+  z-index: 100;
+}
+.nav__thumb {
+  width: 10rem;
+  height: 12.25rem;
+  overflow: hidden;
+}
+.nav__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+.nav__thumb:hover img { transform: scale(1.06); }
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  font-size: 0.9375rem;
+}
+.nav__links a {
+  position: relative;
+  transition: color 0.6s var(--ease);
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -0.7em;
+  width: 0.32em;
+  height: 0.32em;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transform: translateY(-50%) scale(0.3);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+/* активный пункт — синий с точкой (на всех экранах) */
+.nav__links a.is-active { color: var(--accent); }
+.nav__links a.is-active::after { opacity: 1; transform: translateY(-50%) scale(1); }
+/* ховер-анимация — только на десктопе с мышью */
+@media (hover: hover) and (pointer: fine) {
+  .nav__links a:hover { color: var(--accent); }
+  .nav__links a:hover::after { opacity: 1; transform: translateY(-50%) scale(1); }
+}
+
+.lang {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.25rem;
+  padding: 0;
+}
+.lang__opt { opacity: 0.4; transition: opacity 0.3s var(--ease); }
+.lang__opt.is-active { opacity: 1; }
+.lang__sep { opacity: 0.4; }
+
+/* ---------- HERO ---------- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 7.5rem var(--gutter) 0;
+}
+.hero__intro {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  max-width: 52ch;
+  margin: 0 auto clamp(3.75rem, 14vh, 11.25rem);
+  text-indent: 4em;
+}
+.wordmark {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(4rem, 21vw, 21rem);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  margin: 0 calc(-1 * var(--gutter));
+  text-align: center;
+}
+
+/* ---------- SECTION SHELL ---------- */
+section {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* ---------- INFO ---------- */
+.info {
+  padding-top: clamp(5rem, 14vh, 11.25rem);
+  padding-bottom: clamp(1.5rem, 4vh, 3rem);
+}
+.info__text {
+  margin-left: auto;
+  max-width: 62ch;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4em;
+}
+.info__text p {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+.info__text p:first-child { text-indent: 4em; }
+
+/* ---------- SERVICES ---------- */
+.services {
+  padding-top: clamp(1.75rem, 5vh, 3.5rem);
+  padding-bottom: clamp(3.75rem, 10vh, 7.5rem);
+}
+.svc {
+  list-style: none;
+  max-width: 62ch;
+  margin-left: auto;
+}
+.svc__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.375rem, 1vw, 0.75rem) 0;
+  cursor: default;
+}
+.svc__name {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(1.05rem, 1.7vw, 1.5rem);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transition: transform 0.4s var(--ease);
+}
+.svc__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--fg);
+  flex: 0 0 auto;
+  transition: background 0.3s var(--ease), transform 0.4s var(--ease);
+}
+.svc__item:hover .svc__name { transform: translateX(clamp(0.5rem, 1.5vw, 1.5rem)); }
+.svc__item:hover .svc__dot { background: var(--accent); transform: scale(1.8); }
+
+/* ---------- WORK ---------- */
+.work {
+  padding-top: clamp(3.75rem, 10vh, 7.5rem);
+  padding-bottom: clamp(3.75rem, 10vh, 7.5rem);
+}
+.work__title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 9vw, 9rem);
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: -0.01em;
+  margin-bottom: clamp(3.125rem, 9vh, 6.875rem);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 3vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
+}
+.tile { display: block; }
+.tile:nth-child(2) { margin-top: clamp(2.5rem, 8vw, 7.5rem); }
+.tile:nth-child(6) { margin-top: clamp(1.875rem, 6vw, 5.625rem); }
+.tile__img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #f2f2f2;
+  overflow: hidden;
+}
+.tile__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s var(--ease);
+}
+.tile:hover .tile__img img { transform: scale(1.04); }
+.tile__cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 0.875rem;
+}
+.tile__name { font-size: 1rem; font-weight: 500; }
+.tile__meta { font-size: 0.85rem; color: var(--muted); text-align: right; }
+
+/* ---------- CONTACT ---------- */
+.contact {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: clamp(1.125rem, 3vh, 2.25rem);
+}
+.contact__label { font-size: 0.875rem; color: var(--muted); }
+.contact__tg {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 11vw, 10rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  position: relative;
+  transition: color 0.7s var(--ease);
+}
+.contact__tg::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -0.5em;
+  width: 0.13em;
+  height: 0.13em;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transform: translateY(-50%) scale(0.3);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.contact__tg:hover { color: var(--accent); }
+.contact__tg:hover::after { opacity: 1; transform: translateY(-50%) scale(1); }
+.contact__sub { font-size: 0.875rem; color: var(--muted); }
+
+/* ---------- REVEAL ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.375rem);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 53.75em) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .tile:nth-child(2), .tile:nth-child(6) { margin-top: 0; }
+  .info__text { margin-left: 0; }
+}
+@media (max-width: 35em) {
+  .nav__thumb { width: 6.875rem; height: 8.375rem; }
+  .nav__links { gap: 0.875rem; font-size: 0.8125rem; }
+  .grid { grid-template-columns: 1fr; }
+  .hero__intro { text-indent: 2em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
