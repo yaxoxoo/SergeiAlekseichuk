@@ -298,6 +298,7 @@ section {
 @media (max-width: 35em) {
   :root { --gutter: 0.875rem; }
   .nav__links { gap: 0.875rem; font-size: 0.8125rem; }
+  .hero { min-height: 80vh; }
   .hero__intro { font-size: 1rem; text-indent: 2em; }
   .info__text p { font-size: 1rem; }
 }
