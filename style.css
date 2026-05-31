@@ -289,6 +289,10 @@ section {
     align-items: start;
   }
   .grid .tile:nth-child(even) { margin-top: clamp(1.5rem, 5vw, 3rem); transition-delay: 0.14s; }
+  .tile__cap { flex-direction: column; gap: 0.2rem; margin-top: 0.5rem; }
+  .tile__meta { text-align: left; }
+  .work { padding-bottom: clamp(2rem, 6vh, 3.5rem); }
+  .contact { min-height: 50vh; }
   .info__text { margin-left: 0; }
 }
 @media (max-width: 35em) {
