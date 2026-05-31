@@ -17,7 +17,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 /* Lenis (плавный скролл) */
 html.lenis, html.lenis body { height: auto; }
@@ -206,8 +206,10 @@ section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(1.25rem, 3vw, 3rem) clamp(1.25rem, 3vw, 2.5rem);
+  width: 100%;
+  min-width: 0;
 }
-.tile { display: block; }
+.tile { display: block; min-width: 0; }
 .tile:nth-child(2) { margin-top: clamp(2.5rem, 8vw, 7.5rem); }
 .tile:nth-child(6) { margin-top: clamp(1.875rem, 6vw, 5.625rem); }
 .tile__img {
