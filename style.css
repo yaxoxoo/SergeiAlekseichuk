@@ -282,13 +282,12 @@ section {
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 53.75em) {
   .grid { grid-template-columns: repeat(2, 1fr); }
-  .tile:nth-child(2), .tile:nth-child(6) { margin-top: 0; }
+  .grid .tile:nth-child(even) { margin-top: clamp(1.5rem, 5vw, 3rem); transition-delay: 0.14s; }
   .info__text { margin-left: 0; }
 }
 @media (max-width: 35em) {
   .nav__thumb { width: 6.875rem; height: 8.375rem; }
   .nav__links { gap: 0.875rem; font-size: 0.8125rem; }
-  .grid { grid-template-columns: 1fr; }
   .hero__intro { text-indent: 2em; }
 }
 
