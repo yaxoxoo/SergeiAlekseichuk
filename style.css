@@ -272,6 +272,7 @@ section {
 .contact__tg:hover { color: var(--accent); }
 .contact__tg:hover::after { opacity: 1; transform: translateY(-50%) scale(1); }
 .contact__sub { font-size: 0.875rem; color: var(--muted); }
+.contact__tg + .contact__sub { margin-top: calc(clamp(1.125rem, 3vh, 2.25rem) * -0.5); }
 .contact__call {
   font-family: var(--serif);
   font-weight: 400;
