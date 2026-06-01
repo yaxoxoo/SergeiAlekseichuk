@@ -188,6 +188,15 @@ section {
 .svc__item:hover .svc__name { transform: translateX(clamp(0.5rem, 1.5vw, 1.5rem)); }
 .svc__item:hover .svc__dot { background: var(--accent); transform: scale(1.8); }
 
+@media (hover: none) {
+  .svc__name { transition: transform 0.4s var(--ease), color 0.4s var(--ease); }
+  .svc__item.is-highlighted .svc__name {
+    color: var(--accent);
+    transform: translateX(clamp(0.5rem, 1.5vw, 1.5rem));
+  }
+  .svc__item.is-highlighted .svc__dot { background: var(--accent); transform: scale(1.8); }
+}
+
 /* ---------- WORK ---------- */
 .work {
   padding-top: clamp(3.75rem, 10vh, 7.5rem);

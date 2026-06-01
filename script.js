@@ -37,6 +37,22 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
+// ---------- Highlight services on scroll (touch only) ----------
+if (window.matchMedia("(hover: none)").matches) {
+  const svcObs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-highlighted");
+          svcObs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+  document.querySelectorAll(".svc__item").forEach((item) => svcObs.observe(item));
+}
+
 // ---------- Активный пункт меню (scroll-spy) ----------
 const navLinks = [...document.querySelectorAll('.nav__links a[href^="#"]')];
 const sections = ["info", "work", "contact"]
