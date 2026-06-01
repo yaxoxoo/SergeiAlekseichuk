@@ -272,6 +272,15 @@ section {
 .contact__tg:hover { color: var(--accent); }
 .contact__tg:hover::after { opacity: 1; transform: translateY(-50%) scale(1); }
 .contact__sub { font-size: 0.875rem; color: var(--muted); }
+.contact__phone {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 5vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  transition: color 0.6s var(--ease);
+}
+.contact__phone:hover { color: var(--accent); }
 
 /* ---------- REVEAL ---------- */
 .reveal {
