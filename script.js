@@ -39,18 +39,22 @@ document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
 // ---------- Highlight services on scroll (touch only) ----------
 if (window.matchMedia("(hover: none)").matches) {
-  const svcObs = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
+  const svcList = document.querySelector(".svc");
+  if (svcList) {
+    const svcItems = [...svcList.querySelectorAll(".svc__item")];
+    const svcObs = new IntersectionObserver(
+      ([entry]) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-highlighted");
-          svcObs.unobserve(entry.target);
+          svcItems.forEach((item, i) => {
+            setTimeout(() => item.classList.add("is-highlighted"), i * 160);
+          });
+          svcObs.disconnect();
         }
-      });
-    },
-    { threshold: 0.6 }
-  );
-  document.querySelectorAll(".svc__item").forEach((item) => svcObs.observe(item));
+      },
+      { threshold: 0.25 }
+    );
+    svcObs.observe(svcList);
+  }
 }
 
 // ---------- Активный пункт меню (scroll-spy) ----------
